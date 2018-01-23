@@ -1,6 +1,6 @@
 # 1. 概述
 
-如果百度用户访问第三方应用网页,则第三方应用可以通过网页授权机制,来获取百度用户基 本信息,进而实现自身业务功能。 
+如果百度用户访问第三方应用网页,则第三方应用可以通过网页授权机制,来获取百度用户基 本信息,进而实现自身业务功能。 ![](/assets/oauth.png)
 
 具体而言,百度帐号网页授权流程分为四步: 
 
@@ -36,9 +36,9 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 
 下图为登录授权页面: 
 
-无 scope 权限或 redirect\_uri 不合法时,会展示错误页面,并提示出错原因,如下图示:   
+![](/assets/oauthpage.png)
 
-用户同意授权后:页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
+无 scope 权限或 redirect\_uri 不合法时,会展示错误页面,并提示出错原因,如下图示:   ![](/assets/error1.png)![](/assets/error2.png)用户同意授权后:页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
 
 code 说明:code 作为换取 access\_token 的票据,每次用户授权带上的 code 将不一样,code 只 能使用一次,10 分钟未被使用自动过期。
 
@@ -213,7 +213,7 @@ GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acc
 | error\_code  | int  | 错误码  |
 | error\_msg  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
-关于错误码的详细信息请参考附录 5.4 
+**关于错误码的详细信息请参考附录 5.4** 
 
 返回值示例 
 
