@@ -5,5 +5,5 @@
   * [开发前准备](kai-fa-qian-zhun-bei.md)
   * [开发文档](kai-fa-wen-dang.md)
   * [FAQ](faq.md)
-  * 附录
+  * [附录](fu-lu.md)
 
