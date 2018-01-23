@@ -1,25 +1,23 @@
 # 1. 概述
 
-如果百度用户访问第三方应用网页,则第三方应用可以通过网页授权机制,来获取百度用户基 本信息,进而实现自身业务功能。  
+如果百度用户访问第三方应用网页,则第三方应用可以通过网页授权机制,来获取百度用户基 本信息,进而实现自身业务功能。 
 
+具体而言,百度帐号网页授权流程分为四步: 
 
+1. 引导用户进入授权页面同意授权,获取 code; 
 
-具体而言,百度帐号网页授权流程分为四步:  
+2. 通过 code 换取网页授权 access\_token; 
 
-1. 引导用户进入授权页面同意授权,获取 code;  
-
-2. 通过 code 换取网页授权 access\_token;  
-
-3. 如果需要,开发者可以刷新网页授权 access\_token,避免过期;  
+3. 如果需要,开发者可以刷新网页授权 access\_token,避免过期; 
 
 # 2. 引导用户完成授权获取code
 
-开发时,需要将用户浏览器重定向到如下 URL 地址。   
+开发时,需要将用户浏览器重定向到如下 URL 地址。 
 
-接口调用请求说明  
+接口调用请求说明 
 
 ```
-GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=API_KEY&redirect_uri=REDIRE CT_URI&scope=SCOPE&state=STATE
+GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=API_KEY&redirect_uri=REDIRECT_URI&scope=SCOPE&state=STATE
 ```
 
 参数说明
@@ -36,86 +34,89 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 | confirm\_login | int | 否 | 如传递“confirm\_login=1”且百度用户已处于登陆状态，会提示是否使用已当前登陆用户对应用授权。 |
 | login\_type | string | 否 | 如传递“login\_type=sms”，授权页面会默认使用短信动态密码注册登陆方式。 |
 
-下图为登录授权页面:  
+下图为登录授权页面: 
 
+无 scope 权限或 redirect\_uri 不合法时,会展示错误页面,并提示出错原因,如下图示:   
 
+用户同意授权后:页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
 
-无 scope 权限或 redirect\_uri 不合法时,会展示错误页面,并提示出错原因,如下图示:    
-
-
-
-
-
-用户同意授权后:页面将跳转至 redirect\_uri/?code=CODE&state=STATE。  
-
-code 说明:code 作为换取 access\_token 的票据,每次用户授权带上的 code 将不一样,code 只 能使用一次,10 分钟未被使用自动过期。 
+code 说明:code 作为换取 access\_token 的票据,每次用户授权带上的 code 将不一样,code 只 能使用一次,10 分钟未被使用自动过期。
 
 # 3. 获取网页授权access\_token
 
 redirect\_uri 指定的开发者服务器地址,在获取到授权 code 参数后,从服务端向百度开放平台发起
 
-如下 HTTP 请求,通过 code 换取网页授权 access\_token。  
+如下 HTTP 请求,通过 code 换取网页授权 access\_token。 
 
-注意:access\_token 长度保留 256 字符。   
+注意:access\_token 长度保留 256 字符。 
 
-接口调用请求说明  
+接口调用请求说明 
 
 ```
-GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code=CODE&client_id=AP I_KEY&client_secret=SECRET_KEY&redirect_uri=REDIRECT_URI     
+GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code=CODE&client_id=AP I_KEY&client_secret=SECRET_KEY&redirect_uri=REDIRECT_URI    
 ```
 
 参数说明
 
-| 参数名   | 类型   | 是否必 须   | 描述   |
+| 参数名  | 类型  | 是否必 须  | 描述  |
 | :--- | :--- | :--- | :--- |
-| grant\_type   | string   | 是   | 固定为 authorization\_code   |
-| code   | string   | 是   | 用户授权后得到 code   |
-| client\_id   | string   | 是   | 应用的 API  Key  |
-| client\_secret   | string   | 是   | 应用的 Secret  Key  |
-| redirect\_uri   | string   | 是   | 该值必须与获取 Authorization  Code 时传递的“redirect\_uri”保 持一致。  |
+| grant\_type  | string  | 是  | 固定为 authorization\_code  |
+| code  | string  | 是  | 用户授权后得到 code  |
+| client\_id  | string  | 是  | 应用的 API  Key |
+| client\_secret  | string  | 是  | 应用的 Secret  Key |
+| redirect\_uri  | string  | 是  | 该值必须与获取 Authorization  Code 时传递的“redirect\_uri”保 持一致。 |
 
 返回值说明
 
-Microsoft Word - 百度帐号接入指南V1.1.docx
-
-| 字段名   | 类型   | 描述   |
+| 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| access\_token   | string   | 获取到的网页授权接口调用凭证   |
-| expires\_in   | int   | Access  Token 的有效期,以秒为单位  |
-| refresh\_token   | string   | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;\(1 0 年 的 有 效期\)  |
-| scope   | string   | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\)  |
-| session\_key   | string   | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致  |
-| session\_secret | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
+| access\_token  | string  | 获取到的网页授权接口调用凭证  |
+| expires\_in  | int  | Access  Token 的有效期,以秒为单位 |
+| refresh\_token  | string  | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;\(1 0 年 的 有 效期\) |
+| scope  | string  | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\) |
+| session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
+| session\_secret | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
 
 错误情况下
 
 Microsoft Word - 百度帐号接入指南V1.1.docx
 
-| 字段名   | 类型   | 描述   |
+| 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| error   | string   | 错误码;关于错误码的详细信息请参考附录 5.3  |
-| error\_description   | string   | 错误描述信息,用来帮助理解和解决发生的错误   |
+| error  | string  | 错误码;关于错误码的详细信息请参考附录 5.3 |
+| error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
 返回值示例
 
 ```
-{              "access_token":  "1.a6b7dbd428f731035f771b8d15063f61.86400.1292922000-2346678-124328",              "expires_in":  86400,              "refresh_token":  "2.385d55f8615fdfd9edb7c4b5ebdc3e39.604800.1293440400-2346678-124328",               "scope":  "basic  email",              "session_key":  "ANXxSNjwQDugf8615OnqeikRMu2bKaXCdlLxn",              "session_secret":  "248APxvxjCZ0VEC43EYrvxqaK4oZExMB"  }  
+{  
+     "access_token":  "1.a6b7dbd428f731035f771b8d15063f61.86400.1292922000-2346678-124328",  
+     "expires_in":  86400,  
+     "refresh_token":  "2.385d55f8615fdfd9edb7c4b5ebdc3e39.604800.1293440400-2346678-124328",               
+     "scope":  "basic  email",  
+     "session_key":  "ANXxSNjwQDugf8615OnqeikRMu2bKaXCdlLxn",  
+     "session_secret":  "248APxvxjCZ0VEC43EYrvxqaK4oZExMB"  
+} 
 ```
 
 出错时返回
 
 ```
-{              "error":  "invalid_grant",              "error_description":  "Invalid  authorization  code:  ANXxSNjwQDugOnqeikRMu2bKaXCdlLxn"   }  
+{  
+     "error":  "invalid_grant",  
+     "error_description":  "Invalid  authorization  code:  ANXxSNjwQDugOnqeikRMu2bKaXCdlLxn"   
+} 
 ```
 
 # 4. 按需刷新access\_token
 
-当 access\_token 过期后,可以使用 refresh\_token 进行刷新。refresh\_token 有效期为十年。   
+当 access\_token 过期后,可以使用 refresh\_token 进行刷新。refresh\_token 有效期为十年。 
 
-接口调用请求说明  
+接口调用请求说明 
 
 ```
-GET  https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token=REFRESH_TOKEN &client_id=API_KEY&client_secret=SECRET_KEY   
+GET  
+https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token=REFRESH_TOKEN &client_id=API_KEY&client_secret=SECRET_KEY 
 ```
 
 参数说明
@@ -129,54 +130,59 @@ GET  https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refre
 
 返回值说明
 
-| 字段名   | 类型   | 描述   |
+| 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| access\_token   | string   | 获取到的网页授权接口调用凭证   |
-| expires\_in   | int   | Access  Token 的有效期,以秒为单位  |
-| refresh\_token   | string   | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;\(1 0 年 的 有 效期\)  |
-| scope   | string   | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\)  |
-| session\_key   | string   | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致  |
-| session\_secret   | string   | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。  |
+| access\_token  | string  | 获取到的网页授权接口调用凭证  |
+| expires\_in  | int  | Access  Token 的有效期,以秒为单位 |
+| refresh\_token  | string  | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;\(1 0 年 的 有 效期\) |
+| scope  | string  | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\) |
+| session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
+| session\_secret  | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
 
-错误情况下  
+错误情况下 
 
-| 字段名   | 类型   | 描述   |
+| 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| error   | string   | 错误码;关于错误码的详细信息请参考附录 5.3  |
-| error\_description   | string   | 错误描述信息,用来帮助理解和解决发生的错误   |
+| error  | string  | 错误码;关于错误码的详细信息请参考附录 5.3 |
+| error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
 返回值示例
 
 ```
-{              "access_token":  "1.a6b7dbd428f731035f771b8d15063f61.86400.1292922000-2346678-124328",               "expires_in":  86400,              "refresh_token":  "2.af3d55f8615fdfd9edb7c4b5ebdc3e32.604800.1293440400-2346678-124328",               "scope":  "basic  email",              "session_key":  "ANXxSNjwQDugf8615OnqeikRMu2bKaXCdlLxn",              "session_secret":  "248APxvxjCZ0VEC43EYrvxqaK4oZExMB"  }  
+{  
+     "access_token":  "1.a6b7dbd428f731035f771b8d15063f61.86400.1292922000-2346678-124328",               
+     "expires_in":  86400,  
+     "refresh_token":  "2.af3d55f8615fdfd9edb7c4b5ebdc3e32.604800.1293440400-2346678-124328",               
+     "scope":  "basic  email",  
+     "session_key":  "ANXxSNjwQDugf8615OnqeikRMu2bKaXCdlLxn",  
+     "session_secret":  "248APxvxjCZ0VEC43EYrvxqaK4oZExMB"  
+} 
 ```
 
 出错时返回
 
 ```
 {
-    "error": "expired_token",
-    "error_description": "refresh token has been used"
+     "error": "expired_token",
+     "error_description": "refresh token has been used"
 }
 ```
 
 # 5. 获取授权用户信息
 
-获取 access\_token 之后,开发者可以通过 access\_token 拉取用户信息。  
+获取 access\_token 之后,开发者可以通过 access\_token 拉取用户信息。 
 
-接口调用请求说明  
+接口调用请求说明 
 
 ```
-GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=access_token  
+GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=access_token 
 ```
 
 参数说明
 
-| 参数名   | 类型   | 是否必须   | 描述   |
+| 参数名  | 类型  | 是否必须  | 描述  |
 | :--- | :--- | :--- | :--- |
-| access\_token   | string   | 是   | 由上述步骤获取的 openapi 接口调用凭证   |
+| access\_token  | string  | 是  | 由上述步骤获取的 openapi 接口调用凭证  |
 
 返回参数
-
-
 
