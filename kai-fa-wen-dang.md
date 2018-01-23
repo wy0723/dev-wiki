@@ -208,40 +208,40 @@ GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acc
 
 错误情况下
 
-| 字段名   | 类型   | 描述   |
+| 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| error\_code   | int   | 错误码   |
-| error\_msg   | string   | 错误描述信息,用来帮助理解和解决发生的错误   |
+| error\_code  | int  | 错误码  |
+| error\_msg  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
-关于错误码的详细信息请参考附录 5.4  
+关于错误码的详细信息请参考附录 5.4 
 
-返回值示例  
+返回值示例 
 
 ```
-{                                                                                        
-     "userid":  "2097322476",  
-     "username":  "wl19871011",         
-     "realname":  "阳光",  
-     "userdetail":  "喜欢自由",  
-     "birthday":  "1987-01-01",  
-     "marriage":  "0",  
-     "sex":  "1",  
-     "blood":  "3",  
-     "constellation":  "2",  
-     "figure":  "2",  
-     "education":  "0",  
-     "trade":  "0",  
-     "job":  "0"  
+{                                                                                        
+     "userid":  "2097322476",  
+     "username":  "wl19871011",         
+     "realname":  "阳光",  
+     "userdetail":  "喜欢自由",  
+     "birthday":  "1987-01-01",  
+     "marriage":  "0",  
+     "sex":  "1",  
+     "blood":  "3",  
+     "constellation":  "2",  
+     "figure":  "2",  
+     "education":  "0",  
+     "trade":  "0",  
+     "job":  "0"  
  }
 ```
 
 出错时返回
 
 ```
-{  
-     "error_code":  "100",  
-     "error_msg":  "Invalid  parameter"   
-}  
+{  
+     "error_code":  "100",  
+     "error_msg":  "Invalid  parameter"   
+} 
 ```
 
 
