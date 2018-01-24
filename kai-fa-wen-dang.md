@@ -1,4 +1,4 @@
-\[TOC\]
+
 
 # 1. 概述
 
@@ -24,13 +24,13 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 
 参数说明
 
-| 参数名 | 类型 | 是否必须 | 描述 |
+| **参数名** | **类型** | **是否必须** | **描述** |
 | :--- | :--- | :--- | :--- |
 | response\_type | string  | 是  | 固定为 code。 |
 | client\_id | string | 是 | 注册应用时获得的API Key。 |
-|  | string | 是 | 授权后要回调的URI，即接收Authorization Code的URI。如果用户在授权过程中取消授权，会回调该URI，并在URI末尾附上error=access\_denied参数。对于无Web Server的应用，其值可以是“oob”，此时用户同意授权后，授权服务会将Authorization Code直接显示在响应页面的页面中及页面title中。非“oob”值的redirect\_uri按照如下规则进行匹配：（1）如果开发者在“授权安全设置”中配置了“授权回调地址”，则redirect\_uri必须与“授权回调地址”中的某一个相匹配； （2）如果未配置“授权回调地址”，redirect\_uri所在域名必须与开发者注册应用时所提供的网站根域名列表或应用的站点地址（如果根域名列表没填写）的域名相匹配。授权回调地址配置请参考附录5.1。 |
+|  | string | 是 | 授权后要回调的URI，即接收Authorization Code的URI。如果用户在授权过程中取消授权，会回调该URI，并在URI末尾附上error=access\_denied参数。对于无Web Server的应用，其值可以是“oob”，此时用户同意授权后，授权服务会将Authorization Code直接显示在响应页面的页面中及页面title中。非“oob”值的redirect\_uri按照如下规则进行匹配：（1）如果开发者在“授权安全设置”中配置了“授权回调地址”，则redirect\_uri必须与“授权回调地址”中的某一个相匹配； （2）如果未配置“授权回调地址”，redirect\_uri所在域名必须与开发者注册应用时所提供的网站根域名列表或应用的站点地址（如果根域名列表没填写）的域名相匹配。**授权回调地址配置请参考附录5.1**。 |
 | scope | string | 否 | 以空格分隔的权限列表，若不传递此参数，代表请求用户的默认权限。可填basic或mobile。 |
-| display | string | 否 | 登录和授权页面的展现样式，默认为“page”，具体参数定义请参考附录5.2。 |
+| display | string | 否 | 登录和授权页面的展现样式，默认为“page”，**具体参数定义请参考附录5.2**。 |
 | state | string | 否 | 重定向后会带上state参数。建议开发者利用state参数来防止CSRF攻击。 |
 | force\_login | int | 否 | 如传递“force\_login=1”，则加载登录页时强制用户输入用户名和口令，不会从cookie中读取百度用户的登陆状态。 |
 | confirm\_login | int | 否 | 如传递“confirm\_login=1”且百度用户已处于登陆状态，会提示是否使用已当前登陆用户对应用授权。 |
@@ -60,30 +60,28 @@ GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&c
 
 参数说明
 
-| 参数名  | 类型  | 是否必 须  | 描述  |
+| **参数名 ** | **类型 ** | **是否必须 ** | **描述 ** |
 | :--- | :--- | :--- | :--- |
 | grant\_type  | string  | 是  | 固定为 authorization\_code  |
 | code  | string  | 是  | 用户授权后得到 code  |
 | client\_id  | string  | 是  | 应用的 API  Key |
 | client\_secret  | string  | 是  | 应用的 Secret  Key |
-| redirect\_uri  | string  | 是  | 该值必须与获取 Authorization  Code 时传递的“redirect\_uri”保 持一致。 |
+| redirect\_uri  | string  | 是  | **该值必须与获取 Authorization  Code 时传递的“redirect\_uri”保持一致。** |
 
 返回值说明
 
-| 字段名  | 类型  | 描述  |
+| **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | access\_token  | string  | 获取到的网页授权接口调用凭证  |
 | expires\_in  | int  | Access  Token 的有效期,以秒为单位 |
-| refresh\_token  | string  | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;\(1 0 年 的 有 效期\) |
+| refresh\_token  | string  | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;**\(10年的有效期\)** |
 | scope  | string  | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\) |
 | session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
 | session\_secret | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
 
 错误情况下
 
-Microsoft Word - 百度帐号接入指南V1.1.docx
-
-| 字段名  | 类型  | 描述  |
+| **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | error  | string  | 错误码;关于错误码的详细信息请参考附录 5.3 |
 | error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
@@ -117,8 +115,7 @@ Microsoft Word - 百度帐号接入指南V1.1.docx
 接口调用请求说明 
 
 ```
-GET  
-https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token=REFRESH_TOKEN &client_id=API_KEY&client_secret=SECRET_KEY 
+GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token=REFRESH_TOKEN &client_id=API_KEY&client_secret=SECRET_KEY 
 ```
 
 参数说明
@@ -132,11 +129,11 @@ https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token
 
 返回值说明
 
-| 字段名  | 类型  | 描述  |
+| **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | access\_token  | string  | 获取到的网页授权接口调用凭证  |
 | expires\_in  | int  | Access  Token 的有效期,以秒为单位 |
-| refresh\_token  | string  | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;\(1 0 年 的 有 效期\) |
+| refresh\_token  | string  | 用于刷新Access Token的Refresh Token，所有应用都会返回该参数;**\(10年的有效期\)** |
 | scope  | string  | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\) |
 | session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
 | session\_secret  | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
@@ -145,7 +142,7 @@ https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token
 
 | 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| error  | string  | 错误码;关于错误码的详细信息请参考附录 5.3 |
+| error  | string  | 错误码；**关于错误码的详细信息请参考附录 5.3** |
 | error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
 返回值示例
@@ -182,13 +179,13 @@ GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acc
 
 参数说明
 
-| 参数名  | 类型  | 是否必须  | 描述  |
+| **参数名 ** | **类型 ** | **是否必须 ** | 描述  |
 | :--- | :--- | :--- | :--- |
 | access\_token  | string  | 是  | 由上述步骤获取的 openapi 接口调用凭证  |
 
 返回参数
 
-| **参数名称** | **参数类型** | **是否必需** | **示例值** | **描述** |
+| **参数名** | **参数类型** | **是否必需** | **示例值** | **描述** |
 | :--- | :--- | :--- | :--- | :--- |
 | userid | uint | 是 | 67411167 | 当前登录用户的数字ID |
 | securemobile | uint | 否 | 188888888 | 当前用户绑定手机号（需要向开放平台申请权限） |
@@ -210,7 +207,7 @@ GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acc
 
 错误情况下
 
-| 字段名  | 类型  | 描述  |
+| **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | error\_code  | int  | 错误码  |
 | error\_msg  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
