@@ -8,7 +8,5 @@
 
 **第二步：获取应用AK及SK**
 
-创建工程成功后，页面跳转到工程基本信息页，即可查看应用的API Key\(AK\)和Secret Key \(SK\)。   
-
-![](/assets/aksk.png)
+创建工程成功后，页面跳转到工程基本信息页，即可查看应用的API Key\(AK\)和Secret Key \(SK\)。   ![](/assets/aksk.png)
 
