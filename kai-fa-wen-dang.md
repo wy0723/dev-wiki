@@ -40,7 +40,13 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 
 ![](/assets/oauthpage.png)
 
-无scope权限或redirect\_uri不合法时，会展示错误页面，并提示出错原因，如下图示：![](/assets/error1.png)![](/assets/error2.png)用户同意授权后：页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
+无scope权限或redirect\_uri不合法时，会展示错误页面，并提示出错原因，如下图示：
+
+![](/assets/error1.png)
+
+![](/assets/error2.png)
+
+用户同意授权后：页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
 
 code说明：code作为换取access\_token的票据，每次用户授权带上的code将不一样，code只能使用一次，10分钟未被使用自动过期。
 
