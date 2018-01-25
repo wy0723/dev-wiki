@@ -1,28 +1,28 @@
-
-
 # 1. 概述
 
-如果百度用户访问第三方应用网页,则第三方应用可以通过网页授权机制,来获取百度用户基 本信息,进而实现自身业务功能。 ![](/assets/oauth.png)
+如果百度用户访问第三方应用网页，则第三方应用可以通过网页授权机制，来获取百度用户基本信息，进而实现自身业务功能。 ![](/assets/oauth.png)
 
-具体而言,百度帐号网页授权流程分为四步: 
+具体而言,百度帐号网页授权流程分为四步：
 
-1. 引导用户进入授权页面同意授权,获取 code; 
+1. 引导用户进入授权页面同意授权，获取code；
 
-2. 通过 code 换取网页授权 access\_token; 
+2. 通过code换取网页授权access\_token；
 
-3. 如果需要,开发者可以刷新网页授权 access\_token,避免过期; 
+3. 如果需要，开发者可以刷新网页授权access\_token，避免过期；
+
+4. 通过网页授权access\_token获取用户基本信息。 
 
 # 2. 引导用户完成授权获取code
 
-开发时,需要将用户浏览器重定向到如下 URL 地址。 
+开发时，需要将用户浏览器重定向到如下URL地址。 
 
-接口调用请求说明 
+接口调用请求说明：
 
 ```
 GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=API_KEY&redirect_uri=REDIRECT_URI&scope=SCOPE&state=STATE
 ```
 
-参数说明
+参数说明：
 
 | **参数名** | **类型** | **是否必须** | **描述** |
 | :--- | :--- | :--- | :--- |
@@ -36,29 +36,27 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 | confirm\_login | int | 否 | 如传递“confirm\_login=1”且百度用户已处于登陆状态，会提示是否使用已当前登陆用户对应用授权。 |
 | login\_type | string | 否 | 如传递“login\_type=sms”，授权页面会默认使用短信动态密码注册登陆方式。 |
 
-下图为登录授权页面: 
+下图为登录授权页面：
 
 ![](/assets/oauthpage.png)
 
-无 scope 权限或 redirect\_uri 不合法时,会展示错误页面,并提示出错原因,如下图示:   ![](/assets/error1.png)![](/assets/error2.png)用户同意授权后:页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
+无scope权限或redirect\_uri不合法时，会展示错误页面，并提示出错原因，如下图示：![](/assets/error1.png)![](/assets/error2.png)用户同意授权后：页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
 
-code 说明:code 作为换取 access\_token 的票据,每次用户授权带上的 code 将不一样,code 只 能使用一次,10 分钟未被使用自动过期。
+code说明：code作为换取access\_token的票据，每次用户授权带上的code将不一样，code只能使用一次，10分钟未被使用自动过期。
 
 # 3. 获取网页授权access\_token
 
-redirect\_uri 指定的开发者服务器地址,在获取到授权 code 参数后,从服务端向百度开放平台发起
+redirect\_uri指定的开发者服务器地址，在获取到授权code参数后，从服务端向百度开放平台发起如下HTTP请求，通过code换取网页授权access\_token。 
 
-如下 HTTP 请求,通过 code 换取网页授权 access\_token。 
+注意：access\_token长度保留256字符。 
 
-注意:access\_token 长度保留 256 字符。 
-
-接口调用请求说明 
+接口调用请求说明：
 
 ```
-GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code=CODE&client_id=AP I_KEY&client_secret=SECRET_KEY&redirect_uri=REDIRECT_URI    
+GET https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code=CODE&client_id=AP I_KEY&client_secret=SECRET_KEY&redirect_uri=REDIRECT_URI    
 ```
 
-参数说明
+参数说明：
 
 | **参数名 ** | **类型 ** | **是否必须 ** | **描述 ** |
 | :--- | :--- | :--- | :--- |
@@ -68,7 +66,7 @@ GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&c
 | client\_secret  | string  | 是  | 应用的 Secret  Key |
 | redirect\_uri  | string  | 是  | **该值必须与获取 Authorization  Code 时传递的“redirect\_uri”保持一致。** |
 
-返回值说明
+返回值说明：
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
@@ -79,14 +77,14 @@ GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&c
 | session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
 | session\_secret | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
 
-错误情况下
+错误情况下：
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | error  | string  | 错误码;关于错误码的详细信息请参考附录 5.3 |
 | error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
-返回值示例
+返回值示例：
 
 ```
 {  
@@ -99,7 +97,7 @@ GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&c
 } 
 ```
 
-出错时返回
+出错时返回：
 
 ```
 {  
@@ -110,15 +108,15 @@ GET   https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&c
 
 # 4. 按需刷新access\_token
 
-当 access\_token 过期后,可以使用 refresh\_token 进行刷新。refresh\_token 有效期为十年。 
+当access\_token过期后，可以使用refresh\_token进行刷新。refresh\_token有效期为十年。 
 
-接口调用请求说明 
+接口调用请求说明：
 
 ```
 GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_token=REFRESH_TOKEN &client_id=API_KEY&client_secret=SECRET_KEY 
 ```
 
-参数说明
+参数说明：
 
 | **参数名** | **类型** | **是否必须** | **描述** |
 | :--- | :--- | :--- | :--- |
@@ -127,7 +125,7 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_t
 | client\_id | string | 是 | 应用的API Key |
 | client\_secret | string | 是 | 应用的Secret Key |
 
-返回值说明
+返回值说明：
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
@@ -138,14 +136,14 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_t
 | session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
 | session\_secret  | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
 
-错误情况下 
+错误情况下：
 
 | 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
 | error  | string  | 错误码；**关于错误码的详细信息请参考附录 5.3** |
 | error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
-返回值示例
+返回值示例：
 
 ```
 {  
@@ -158,7 +156,7 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_t
 } 
 ```
 
-出错时返回
+出错时返回：
 
 ```
 {
@@ -169,21 +167,21 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_t
 
 # 5. 获取授权用户信息
 
-获取 access\_token 之后,开发者可以通过 access\_token 拉取用户信息。 
+获取access\_token之后，开发者可以通过access\_token拉取用户信息。 
 
-接口调用请求说明 
+接口调用请求说明：
 
 ```
-GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=access_token 
+GET https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=access_token 
 ```
 
-参数说明
+参数说明：
 
 | **参数名 ** | **类型 ** | **是否必须 ** | 描述  |
 | :--- | :--- | :--- | :--- |
 | access\_token  | string  | 是  | 由上述步骤获取的 openapi 接口调用凭证  |
 
-返回参数
+返回参数：
 
 | **参数名** | **参数类型** | **是否必需** | **示例值** | **描述** |
 | :--- | :--- | :--- | :--- | :--- |
@@ -205,16 +203,16 @@ GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acc
 | is\_bind\_mobile | uint | 否 | 0:未绑定,1:已绑定 | 是否绑定手机号 |
 | is\_realname | uint | 否 | 0：未实名制，1：已实名制 | 是否实名制 |
 
-错误情况下
+错误情况下：
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | error\_code  | int  | 错误码  |
 | error\_msg  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
 
-**关于错误码的详细信息请参考附录 5.4** 
+**关于错误码的详细信息请参考附录5.4** 
 
-返回值示例 
+返回值示例：
 
 ```
 {                                                                                        
@@ -234,7 +232,7 @@ GET  https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acc
  }
 ```
 
-出错时返回
+出错时返回：
 
 ```
 {  

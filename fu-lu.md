@@ -1,21 +1,19 @@
-
-
 # 1. 授权回调地址
 
-为确保验证授权过程的安全,开发者必须在开发者中心预先注册应用所在的域名或 URL,用以 OAuth2.0 检验授权请求中的“redirect\_uri”参数。以便保证 OAuth2.0 在回调过程中,会回调到 安全域名。 
+为确保验证授权过程的安全，开发者必须在开发者中心预先注册应用所在的域名或URL，用以OAuth2.0检验授权请求中的“redirect\_uri”参数。以便保证OAuth2.0在回调过程中，会回调到安全域名。 
 
-请进入如下页面对授权回调地址进行配置:进入开发者中心应用管理页,点击需要配置回调地 址的工程,进入工程基本信息页,即可在左侧导航找到“安全设置”的入口。   \(授权回调页请填写 完整 url，例如:[http://www.example.com/oauth\_redirect](http://www.example.com/oauth_redirect%29。) ）。![](/assets/anquan.png)
+请进入如下页面对授权回调地址进行配置：进入开发者中心应用管理页，点击需要配置回调地址的工程，进入工程基本信息页，即可在左侧导航找到“安全设置”的入口。（授权回调页请填写完整url，例如:[http://www.example.com/oauth\_redirect](http://www.example.com/oauth_redirect%29。) ）。![](/assets/anquan.png)
 
 # 2. display参数说明
 
-请求用户授权时百度提供了一个在 OAuth2.0 协议中没有提到的参数:display。它是用来标识 不同形式的客户端所对应的不同展现形式的授权页面,其值定义如下: 
+请求用户授权时百度提供了一个在OAuth2.0协议中没有提到的参数：display。它是用来标识不同形式的客户端所对应的不同展现形式的授权页面，其值定义如下：
 
-* page:全屏形式的授权页面\(默认\),适用于web应用。 
-* popup: 弹框形式的授权页面,适用于桌面软件应用和web应用。 
-* dialog:浮层形式的授权页面,只能用于站内web应用。 
-* mobile:IPhone/Android等智能移动终端上用的授权页面,适用于IPhone/Android等智能移动终端上的应用。 
-* pad: IPad/Android等平板上使用的授权页面,适用于IPad/Android等智能移动终端上的应用。 
-* tv:电视等超大显示屏使用的授权页面。 
+* page：全屏形式的授权页面（默认），适用于web应用。 
+* popup：弹框形式的授权页面，适用于桌面软件应用和web应用。 
+* dialog：浮层形式的授权页面，只能用于站内web应用。 
+* mobile：IPhone/Android等智能移动终端上用的授权页面，适用于IPhone/Android等智能移动终端上的应用。 
+* pad：IPad/Android等平板上使用的授权页面，适用于IPad/Android等智能移动终端上的应用。 
+* tv：电视等超大显示屏使用的授权页面。 
 
 # 3. OAuth2.0错误码列表
 
