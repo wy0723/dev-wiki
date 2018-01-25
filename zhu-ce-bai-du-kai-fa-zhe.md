@@ -2,11 +2,13 @@
 
 请在浏览器中访问 [http://developer.baidu.com](http://developer.baidu.com) 进入百度开发者中心官网。
 
-![](/assets/potal.png)
-
 **第二步：使用百度帐号登录官网 **
 
-如果您还没有百度帐号，请在官网首页右上角找到“注册”入口，按照百度帐号统一注册流程进行注册。![](/assets/register.png) 
+如果您还没有百度帐号，请在官网首页右上角找到“注册”入口，按照百度帐号统一注册流程进行注册。
+
+![](/assets/potal.png)
+
+![](/assets/register.png)
 
 如果您已有百度帐号，请在官网首页右上角找到“登录”入口，使用百度帐号进行登录。
 
