@@ -222,19 +222,19 @@ GET https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acces
 
 ```
 {                                                                                        
-     "userid":  "2097322476",  
-     "username":  "wl19871011",         
-     "realname":  "阳光",  
-     "userdetail":  "喜欢自由",  
-     "birthday":  "1987-01-01",  
-     "marriage":  "0",  
-     "sex":  "1",  
-     "blood":  "3",  
-     "constellation":  "2",  
-     "figure":  "2",  
-     "education":  "0",  
-     "trade":  "0",  
-     "job":  "0"  
+     "userid": "2097322476",
+     "username": "wl19871011",         
+     "realname": "阳光",  
+     "userdetail": "喜欢自由",  
+     "birthday": "1987-01-01",  
+     "marriage": "0",  
+     "sex": "1",  
+     "blood": "3",  
+     "constellation": "2",  
+     "figure": "2",  
+     "education": "0",  
+     "trade": "0",  
+     "job": "0"  
  }
 ```
 
@@ -242,8 +242,8 @@ GET https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acces
 
 ```
 {  
-     "error_code":  "100",  
-     "error_msg":  "Invalid  parameter"   
+     "error_code": "100",  
+     "error_msg": "Invalid  parameter"   
 } 
 ```
 
