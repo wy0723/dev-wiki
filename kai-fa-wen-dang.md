@@ -10,7 +10,7 @@
 
 3. 如果需要，开发者可以刷新网页授权access\_token，避免过期；
 
-4. 通过网页授权access\_token获取用户基本信息。 
+4. 通过网页授权access\_token获取用户基本信息。
 
 # 2. 引导用户完成授权获取code
 
@@ -60,29 +60,29 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code
 
 | **参数名 ** | **类型 ** | **是否必须 ** | **描述 ** |
 | :--- | :--- | :--- | :--- |
-| grant\_type  | string  | 是  | 固定为 authorization\_code  |
-| code  | string  | 是  | 用户授权后得到 code  |
-| client\_id  | string  | 是  | 应用的 API  Key |
-| client\_secret  | string  | 是  | 应用的 Secret  Key |
-| redirect\_uri  | string  | 是  | **该值必须与获取 Authorization  Code 时传递的“redirect\_uri”保持一致。** |
+| grant\_type  | string  | 是  | 固定为authorization\_code  |
+| code  | string  | 是  | 用户授权后得到code  |
+| client\_id  | string  | 是  | 应用的API Key |
+| client\_secret  | string  | 是  | 应用的Secret Key |
+| redirect\_uri  | string  | 是  | **该值必须与获取Authorization  Code时传递的“redirect\_uri”保持一致。** |
 
 返回值说明：
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | access\_token  | string  | 获取到的网页授权接口调用凭证  |
-| expires\_in  | int  | Access  Token 的有效期,以秒为单位 |
-| refresh\_token  | string  | 用于刷新 Access   Token   的   Refresh   Token,所有应用都会返回该参数;**\(10年的有效期\)** |
-| scope  | string  | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\) |
-| session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
-| session\_secret | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
+| expires\_in  | int  | Access Token的有效期，以秒为单位 |
+| refresh\_token  | string  | 用于刷新Access Token的Refresh Token，所有应用都会返回该参数**（10年的有效期**） |
+| scope  | string  | Access Token最终的访问范围，即用户实际授予的权限列表（用户在授权页面时，有可能会取消掉某些请求的权限） |
+| session\_key  | string  | 基于http调用Open API时所需要的Session Key，其有效期与Access Token一致 |
+| session\_secret | string  | 基于http调用Open  API时计算参数签名用的签名密钥 |
 
 错误情况下：
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
-| error  | string  | 错误码;关于错误码的详细信息请参考附录 5.3 |
-| error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
+| error  | string  | 错误码，**关于错误码的详细信息请参考附录5.3** |
+| error\_description  | string  | 错误描述信息，用来帮助理解和解决发生的错误 |
 
 返回值示例：
 
@@ -130,18 +130,18 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_t
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
 | access\_token  | string  | 获取到的网页授权接口调用凭证  |
-| expires\_in  | int  | Access  Token 的有效期,以秒为单位 |
-| refresh\_token  | string  | 用于刷新Access Token的Refresh Token，所有应用都会返回该参数;**\(10年的有效期\)** |
-| scope  | string  | Access  Token 最终的访问范围,即用户实际授予的权限列表\(用户在授权页面时,有 可能会取消掉某些请求的权限\) |
-| session\_key  | string  | 基于 http 调用 Open  API 时所需要的 Session  Key,其有效期与 Access  Token 一致 |
-| session\_secret  | string  | 基于 http 调用 Open  API 时计算参数签名用的签名密钥。 |
+| expires\_in  | int  | Access Token的有效期，以秒为单位 |
+| refresh\_token  | string  | 用于刷新Access Token的Refresh Token，所有应用都会返回该参数（**10年的有效期**） |
+| scope  | string  | Access Token最终的访问范围，即用户实际授予的权限列表（用户在授权页面时，有可能会取消掉某些请求的权限） |
+| session\_key  | string  | 基于http调用OpenAPI时所需要的Session Key，其有效期与 Access Token一致 |
+| session\_secret  | string  | 基于http调用OpenAPI时计算参数签名用的签名密钥。 |
 
 错误情况下：
 
 | 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| error  | string  | 错误码；**关于错误码的详细信息请参考附录 5.3** |
-| error\_description  | string  | 错误描述信息,用来帮助理解和解决发生的错误  |
+| error  | string  | 错误码，**关于错误码的详细信息请参考附录5.3** |
+| error\_description  | string  | 错误描述信息，用来帮助理解和解决发生的错误  |
 
 返回值示例：
 
@@ -179,7 +179,7 @@ GET https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acces
 
 | **参数名 ** | **类型 ** | **是否必须 ** | 描述  |
 | :--- | :--- | :--- | :--- |
-| access\_token  | string  | 是  | 由上述步骤获取的 openapi 接口调用凭证  |
+| access\_token  | string  | 是  | 由上述步骤获取的OpenAPI接口调用凭证  |
 
 返回参数：
 
@@ -201,7 +201,7 @@ GET https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acces
 | trade | string | 否 | 0:未知,1:广告/营销/公关,2:航天,3:农业/化工/林业产品,4:汽车,5:计算机/电子产品,6:建筑,7:教育\(包括学生\),8:能源/采矿,9:金融/保险/房地产,10:政府/军事/公共服务,11:招待,12:传媒/出版/娱乐,13:医疗/保健服务,14:制药,15:零售,16:服务,17:电信/网络,18:旅游/交通,19:其他 | 当前职业 |
 | job | string | 否 | 0:未知,1:学生,2:普通职员,3:工程师,4:总经理、董事长、CXO,5:市场部经理,6:销售部经理,7:行政主管,8:人事主管,9:财务主管,10:技术主管,11:退休,12:其他 | 职位 |
 | is\_bind\_mobile | uint | 否 | 0:未绑定,1:已绑定 | 是否绑定手机号 |
-| is\_realname | uint | 否 | 0：未实名制，1：已实名制 | 是否实名制 |
+| is\_realname | uint | 否 | 0:未实名制,1:已实名制 | 是否实名制 |
 
 错误情况下：
 
