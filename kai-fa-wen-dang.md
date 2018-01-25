@@ -2,7 +2,7 @@
 
 如果百度用户访问第三方应用网页，则第三方应用可以通过网页授权机制，来获取百度用户基本信息，进而实现自身业务功能。 ![](/assets/帐号授权时序图.png)
 
-具体而言,百度帐号网页授权流程分为四步：
+具体而言，百度帐号网页授权流程分为四步：
 
 1. 引导用户进入授权页面同意授权，获取code；
 
@@ -46,7 +46,7 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 
 ![](/assets/error2.png)
 
-用户同意授权后：页面将跳转至 redirect\_uri/?code=CODE&state=STATE。 
+用户同意授权后：页面将跳转至redirect\_uri/?code=CODE&state=STATE。 
 
 code说明：code作为换取access\_token的票据，每次用户授权带上的code将不一样，code只能使用一次，10分钟未被使用自动过期。
 
