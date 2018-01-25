@@ -243,7 +243,7 @@ GET https://openapi.baidu.com/rest/2.0/passport/users/getInfo?access_token=acces
 ```
 {  
      "error_code": "100",  
-     "error_msg": "Invalid  parameter"   
+     "error_msg": "Invalid parameter"   
 } 
 ```
 
