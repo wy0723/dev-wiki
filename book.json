@@ -1,0 +1,9 @@
+{
+	"title" : "百度开发者中心文档",
+    "plugins": ["favicon", "-search", "-fontsettings", "-lunr", "-theme-default", "-sharing", "-fontsettings", "theme-devwiki"],
+	"pluginsConfig":{
+                "favicon":{
+                        "shortcut":"favicon.ico"
+                }
+        }
+}
