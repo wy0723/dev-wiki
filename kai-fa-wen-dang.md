@@ -28,9 +28,9 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 | :--- | :--- | :--- | :--- |
 | response\_type | string  | 是  | 固定为 code。 |
 | client\_id | string | 是 | 注册应用时获得的API Key。 |
-|  | string | 是 | 授权后要回调的URI，即接收Authorization Code的URI。如果用户在授权过程中取消授权，会回调该URI，并在URI末尾附上error=access\_denied参数。对于无Web Server的应用，其值可以是“oob”，此时用户同意授权后，授权服务会将Authorization Code直接显示在响应页面的页面中及页面title中。非“oob”值的redirect\_uri按照如下规则进行匹配：（1）如果开发者在“授权安全设置”中配置了“授权回调地址”，则redirect\_uri必须与“授权回调地址”中的某一个相匹配； （2）如果未配置“授权回调地址”，redirect\_uri所在域名必须与开发者注册应用时所提供的网站根域名列表或应用的站点地址（如果根域名列表没填写）的域名相匹配。**授权回调地址配置请参考附录5.1**。 |
+|  | string | 是 | 授权后要回调的URI，即接收Authorization Code的URI。如果用户在授权过程中取消授权，会回调该URI，并在URI末尾附上error=access\_denied参数。对于无Web Server的应用，其值可以是“oob”，此时用户同意授权后，授权服务会将Authorization Code直接显示在响应页面的页面中及页面title中。非“oob”值的redirect\_uri按照如下规则进行匹配：（1）如果开发者在“授权安全设置”中配置了“授权回调地址”，则redirect\_uri必须与“授权回调地址”中的某一个相匹配； （2）如果未配置“授权回调地址”，redirect\_uri所在域名必须与开发者注册应用时所提供的网站根域名列表或应用的站点地址（如果根域名列表没填写）的域名相匹配。**授权回调地址配置请参考附录1**。 |
 | scope | string | 否 | 以空格分隔的权限列表，若不传递此参数，代表请求用户的默认权限。可填basic或mobile。 |
-| display | string | 否 | 登录和授权页面的展现样式，默认为“page”，**具体参数定义请参考附录5.2**。 |
+| display | string | 否 | 登录和授权页面的展现样式，默认为“page”，**具体参数定义请参考附录2**。 |
 | state | string | 否 | 重定向后会带上state参数。建议开发者利用state参数来防止CSRF攻击。 |
 | force\_login | int | 否 | 如传递“force\_login=1”，则加载登录页时强制用户输入用户名和口令，不会从cookie中读取百度用户的登陆状态。 |
 | confirm\_login | int | 否 | 如传递“confirm\_login=1”且百度用户已处于登陆状态，会提示是否使用已当前登陆用户对应用授权。 |
@@ -87,7 +87,7 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=authorization_code&code
 
 | **字段名 ** | **类型 ** | **描述 ** |
 | :--- | :--- | :--- |
-| error  | string  | 错误码，**关于错误码的详细信息请参考附录5.3** |
+| error  | string  | 错误码，**关于错误码的详细信息请参考附录3** |
 | error\_description  | string  | 错误描述信息，用来帮助理解和解决发生的错误 |
 
 返回值示例：
@@ -146,7 +146,7 @@ GET https://openapi.baidu.com/oauth/2.0/token?grant_type=refresh_token&refresh_t
 
 | 字段名  | 类型  | 描述  |
 | :--- | :--- | :--- |
-| error  | string  | 错误码，**关于错误码的详细信息请参考附录5.3** |
+| error  | string  | 错误码，**关于错误码的详细信息请参考附录3** |
 | error\_description  | string  | 错误描述信息，用来帮助理解和解决发生的错误  |
 
 返回值示例：
