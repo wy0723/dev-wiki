@@ -35,7 +35,7 @@ GET https://openapi.baidu.com/oauth/2.0/authorize?response_type=CODE&client_id=A
 | force\_login | int | 否 | 如传递“force\_login=1”，则加载登录页时强制用户输入用户名和口令，不会从cookie中读取百度用户的登陆状态。 |
 | confirm\_login | int | 否 | 如传递“confirm\_login=1”且百度用户已处于登陆状态，会提示是否使用已当前登陆用户对应用授权。 |
 | login\_type | string | 否 | 如传递“login\_type=sms”，授权页面会默认使用短信动态密码注册登陆方式。 |
-| qrext\_appid | int | 否 | 网盘扫码透传字段 |
+| qrext\_appid | string | 否 | 网盘扫码透传字段 |
 | bgurl | string | 否 | 二维码登录方式的背景图片url链接，需要encode |
 | qrcodeW | int | 否 | 自定义二维码图片的宽度 |
 | qrcodeH | int | 否 | 自定义二维码图片的高度 |
